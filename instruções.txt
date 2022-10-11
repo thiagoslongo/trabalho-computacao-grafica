@@ -1,0 +1,10 @@
+Itens necessários: Visual Studio, Live Server VS Plugin e Node. 
+
+Tutorial:
+	Deve ser selecionado a pasta do trabalho dentro do Visual Studio.
+	
+	No console digitar npm install
+
+	Com o Live Server instalado, será selecionado o index.html e gerado uma porta, levando assim a uma guia em seu navegador.
+	
+	No navegador será aberto o trabalho.

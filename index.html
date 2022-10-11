@@ -1,0 +1,207 @@
+<html>
+<head>
+    <title>Computação Gráfica - Matheus e Thiago</title>
+    <style>
+        body { margin: 0; }
+        canvas { width: 100%; height: 100%;};
+    </style>
+</head>
+<body>
+
+    <script src="js/three.js"></script>
+    <script src="js/OrbitControls.js"></script>
+    <script src="js/GLTFLoader.js"></script>
+    <script>
+    
+    var model;
+    const scene = new THREE.Scene();
+    scene.background = new THREE.TextureLoader().load('texture/ceu.png');;
+    
+   
+    const loader = new THREE.GLTFLoader();    
+
+    const camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 10000 );
+
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    document.body.appendChild( renderer.domElement );
+
+   
+
+        window.addEventListener('resize', function()
+        {
+                var width = window.innerWidth;
+                var height = window.innerHeight;
+                renderer.setSize(width, height);
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+        });
+
+        
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        
+        
+        
+       
+        
+
+        var texture = new THREE.TextureLoader().load('texture/faixa.jpg');
+				var geometry = new THREE.BoxGeometry(2500, 10, 20); //quadrilátero com largura, altura e profundidade determinadas
+				var material = new THREE.MeshBasicMaterial( { map: texture } );
+				cube = new THREE.Mesh(geometry, material);
+				scene.add(cube);
+        
+    
+
+        camera.position.z = 1500;
+        camera.position.y = 100;
+        
+
+        var texture = new THREE.TextureLoader().load('texture/asfalto.jpg');
+				var geometry = new THREE.BoxGeometry(2500, 8, 1000); //quadrilátero com largura, altura e profundidade determinadas
+				var material = new THREE.MeshBasicMaterial( { map: texture } );
+				cube = new THREE.Mesh(geometry, material);
+				scene.add(cube);
+        
+
+
+
+
+// Load a glTF resource
+
+const spotLight = new THREE.SpotLight( 0xffffff );
+spotLight.position.set( 0, 0, 10 );
+scene.add( spotLight );
+
+
+
+    
+loader.load(
+	// resource URL
+	'models/rx7/scene.gltf',
+	// called when the resource is loaded
+	function ( gltf ) {
+
+        model = gltf.scene;
+        scene.add(model);
+		        
+
+		gltf.animations; // Array<THREE.AnimationClip>
+		gltf.scene; // THREE.Group
+		gltf.scenes; // Array<THREE.Group>
+		gltf.cameras; // Array<THREE.Camera>
+		gltf.asset; // Object
+
+	},
+	// called while loading is progressing
+	function ( xhr ) {
+
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+	},
+	// called when loading has errors
+	function ( error ) {
+
+		console.log( 'An error happened' );
+
+	}
+);
+
+loader.load(
+	// resource URL
+	'models/rx7/drone.gltf',
+	// called when the resource is loaded
+	function ( gltf ) {
+
+        model2 = gltf.scene;
+        scene.add(model2);
+		        
+
+		gltf.animations; // Array<THREE.AnimationClip>
+		gltf.scene; // THREE.Group
+		gltf.scenes; // Array<THREE.Group>
+		gltf.cameras; // Array<THREE.Camera>
+		gltf.asset; // Object
+
+	},
+	// called while loading is progressing
+	function ( xhr ) {
+
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+	},
+	// called when loading has errors
+	function ( error ) {
+
+		console.log( 'An error happened' );
+
+	}
+);
+loader.load(
+	// resource URL
+	'models/rx7/arquibancada.gltf',
+	// called when the resource is loaded
+	function ( gltf ) {
+
+        model3 = gltf.scene;
+        scene.add(model3);
+		        
+
+		gltf.animations; // Array<THREE.AnimationClip>
+		gltf.scene; // THREE.Group
+		gltf.scenes; // Array<THREE.Group>
+		gltf.cameras; // Array<THREE.Camera>
+		gltf.asset; // Object
+
+	},
+	// called while loading is progressing
+	function ( xhr ) {
+
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+	},
+	// called when loading has errors
+	function ( error ) {
+
+		console.log( 'An error happened' );
+
+	}
+);
+
+
+             
+
+
+
+             var update = function ( )
+        {
+            model.rotation.x += 0;
+            model.rotation.y += -0.0125;
+            model2.position.z += 0.20;
+            model3.scale.x += 0.02, 0.10;
+            this.scale.maxDistance = size * 10;
+
+            
+
+        };
+
+      
+        function render() {
+
+        renderer.render( scene, camera );
+
+}
+
+
+        var GameLoop = function ( )
+        {
+            requestAnimationFrame ( GameLoop);
+
+            update( );
+            render( );
+        };
+
+        GameLoop( );
+    </script>
+</body>
+</html>
